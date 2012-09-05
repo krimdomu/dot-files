@@ -1,0 +1,134 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal autoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#%s
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal cursorcolumn
+setlocal cursorline
+setlocal define=[^A-Za-z_]
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'perl'
+setlocal filetype=perl
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcrq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=\\<\\(use\\|require\\)\\>
+setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.pm','')
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=perldoc\ -f
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=~/Projekte/movingcamel/mvc/lib,~/Projekte/p5-text-template-light/lib,~/Projekte/rex-scm/lib,~/Projekte/rex-augeas/lib,~/Projekte/rex-apache-deploy/lib,~/Projekte/rex/lib,~/Projekte/servercontrol/new/lib,~/Projekte/servercontrol/mod-apache/lib,~/Projekte/servercontrol/mod-memcached/lib,~/Projekte/servercontrol/mod-mysql/lib,~/Projekte/movingcamel/dm4p/lib,~/Projekte/movingcamel/dm4p-adapter-mysql/lib,~/Projekte/net-ssh2-expect/lib,/opt/local/lib/perl5/site_perl/5.12.3/darwin-multi-2level,/opt/local/lib/perl5/site_perl/5.12.3,/opt/local/lib/perl5/vendor_perl/5.12.3/darwin-multi-2level,/opt/local/lib/perl5/vendor_perl/5.12.3,/opt/local/lib/perl5/5.12.3/darwin-multi-2level,/opt/local/lib/perl5/5.12.3,/opt/local/lib/perl5/site_perl/5.12.2/darwin-multi-2level,/opt/local/lib/perl5/site_perl/5.12.2,/opt/local/lib/perl5/site_perl,/opt/local/lib/perl5/vendor_perl/5.12.2/darwin-multi-2level,/opt/local/lib/perl5/vendor_perl/5.12.2,/opt/local/lib/perl5/vendor_perl,,
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=3
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'perl'
+setlocal syntax=perl
+endif
+setlocal tabstop=3
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+31,34fold
+38,41fold
+45,96fold
+103,132fold
+136,310fold
+314,341fold
+345,377fold
+381,390fold
+394,424fold
+31
+normal zc
+38
+normal zc
+45
+normal zc
+103
+normal zc
+136
+normal zo
+314
+normal zc
+345
+normal zc
+381
+normal zo
+394
+normal zc
+let s:l = 42 - ((22 * winheight(0) + 22) / 44)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+42
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :
