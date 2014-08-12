@@ -1,0 +1,9 @@
+#!/bin/bash
+
+tmux unbind-key -n C-w
+
+/usr/bin/vim $*
+
+tmux bind-key -n C-w confirm-before -p "kill-window #W? (y/n)" kill-window
+
+

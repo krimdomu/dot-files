@@ -1,0 +1,32 @@
+#!/bin/bash
+
+. $HOME/bin/config.sh
+. $HOME/bin/functions.sh
+
+dialog --menu Action 20 40 10 \
+  1 'Push upstream' \
+  2 'Fetch pull request' \
+  3 'Git commit all' \
+  4 'Git status' \
+  5 'Git diff' \
+  6 'Run Perltidy in lib' \
+  2>$_temp
+
+if [ $? -eq 0 ]; then
+  todo=$(cat $_temp)
+  if [ "$todo" = "1" ]; then
+    git_push_upstream
+  elif [ "$todo" = "2" ]; then
+    git_fetch_pull_request
+  elif [ "$todo" = "3" ]; then
+    git_commit_all
+  elif [ "$todo" = "4" ]; then
+    git_status
+  elif [ "$todo" = "5" ]; then
+    git_diff
+  elif [ "$todo" = "6" ]; then
+    perl_tidy
+  fi
+fi
+
+

@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+. $HOME/bin/config.sh
+
+OLDIFS=$IFS
+export IFS=$(echo -en "\n\b")
+
+servers_conf=$(cat $HOME/.servers)
+menu_line=""
+servers=()
+iter=0
+for server in $servers_conf; do
+  iter=$[ $iter + 1 ]
+  name=$(echo $server | awk -F, ' { print $1 } ')
+  menu_line="$menu_line $iter $name"
+  servers[$iter]=$server
+done
+
+export IFS=$OLDIFS
+
+dialog --menu Server 20 40 10 \
+  $menu_line \
+  2>$_temp
+
+if [ $? -eq 0 ]; then
+  todo=$(cat $_temp)
+  if [ "$todo" = "1" ]; then
+    tmux new-window -n rootbuild 'ssh rootbuild'
+  elif [ "$todo" = "2" ]; then
+    tmux new-window -n jenkins 'ssh jenkins'
+  elif [ "$todo" = "3" ]; then
+    tmux new-window -n one-de-01 'ssh root@one-de-01.rexify.org'
+  fi
+fi
+
+if [ $? -eq 0 ]; then
+  todo=$(cat $_temp)
+
+  name=$(echo ${servers[$todo]} | awk -F, ' { print $1 } ')
+  ssh=$(echo ${servers[$todo]} | awk -F, ' { print $2 } ')
+
+  tmux new-window -n "$name" "ssh ${ssh}"
+fi
+
+
+
+

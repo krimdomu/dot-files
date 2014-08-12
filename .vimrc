@@ -1,16 +1,45 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+let g:Powerline_symbols = 'fancy'
+let g:perl_interpreter = '/Users/jan/perl5/perlbrew/perls/perl-5.14.2/bin/perl'
+let g:syntastic_perl_lib_path = '/Users/jan/Projekte/rex/lib -I /Users/jan/Projekte/rex-apache-deploy/lib'
+let g:syntastic_perl_lib_path .= '-I /Users/jan/Projekte/rex_ioserver/lib'
+let g:syntastic_perl_lib_path .= '-I /Users/jan/Projekte/rex_ioweb_ui/lib'
+let g:syntastic_perl_lib_path .= '-I /Users/jan/Projekte/rex_ioclient/lib'
+
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
+
+Bundle 'gmarik/vundle'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'mileszs/ack.vim'
+
+
 syn on
-filetype plugin on
+" filetype plugin indent on
 set autoindent
 
 map <F2> :NERDTreeToggle<CR>
 map <F3> :TlistToggle<CR>
 map <F8> :TlistAddFilesRecursive .<CR>
 
-set ts=3
-set sw=3
+map <c-f> :Ack<space>
+imap <c-e> <ESC>A
+imap <c-a> <ESC>I
+
+set ts=2
+set sw=2
 set tw=0
 set expandtab
 set nu
+
+au BufRead,BufNewFile Rexfile           set filetype=perl
+au BufRead,BufNewFile *.pp           set filetype=puppet
 
 colorscheme fu
 " git branch
@@ -35,12 +64,10 @@ set statusline+=%y      "filetype
 set statusline+=%r      "read only flag
 set statusline+=%m      "modified flag
 
-set cursorline
 if has("gui_running")
+   set cursorline
    set cursorcolumn
 endif
-
-
 
 function! StatuslineTabWarning()
     if !exists("b:statusline_tab_warning")

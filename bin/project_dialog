@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+. $HOME/bin/config.sh
+
+project_conf=$(cat $HOME/.projects)
+menu_line=""
+projects=()
+iter=0
+for project in $project_conf; do
+  iter=$[$iter + 1]
+  menu_line="$menu_line $iter $project"
+  projects[$iter]=$project
+done
+
+dialog --menu Project 20 40 10 \
+  $menu_line \
+  2>$_temp
+
+if [ $? -eq 0 ]; then
+  todo=$(cat $_temp)
+  tmux new-window -n "${projects[$todo]}" "cd /home/jan/Projekte/${projects[$todo]} ; zsh"
+fi
+
+

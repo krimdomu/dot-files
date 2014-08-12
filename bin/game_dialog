@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+. $HOME/bin/config.sh
+
+OLDIFS=$IFS
+export IFS=$(echo -en "\n\b")
+
+game_conf=$(cat $HOME/.games)
+menu_line=""
+games=()
+iter=0
+for game in $game_conf; do
+  iter=$[ $iter + 1 ]
+  name=$(echo $game | awk -F, ' { print $2 } ')
+  menu_line="$menu_line $iter $name"
+  games[$iter]=$game
+done
+
+export IFS=$OLDIFS
+
+
+dialog --menu Game 20 40 10 \
+  $menu_line \
+  2>$_temp
+
+if [ $? -eq 0 ]; then
+  todo=$(cat $_temp)
+
+  name=$(echo ${games[$todo]} | awk -F, ' { print $2 } ')
+  path=$(echo ${games[$todo]} | awk -F, ' { print $1 } ')
+  execute=$(echo ${games[$todo]} | awk -F, ' { print $3 } ')
+
+  tmux new-window -n "$name" "cd '${path}'; ${execute}"
+fi
+
+
